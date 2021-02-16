@@ -1,6 +1,4 @@
 from pyspark.sql import SparkSession
-# from lib.logger import Log4j
-import logging
 import logging.config
 
 if __name__ == "__main__":
@@ -10,7 +8,6 @@ if __name__ == "__main__":
         .appName("WelcomeToPySparkSQLExample") \
         .getOrCreate()
 
-    # logger = Log4j(spark)
     logging.config.fileConfig('logging.conf')
     logger = logging.getLogger('WelcomeToPySparkSQLExample')
 
@@ -23,6 +20,6 @@ if __name__ == "__main__":
 
     result = spark.sql("""select country, count(*) as count
     from SOURCE_TBL where Age<40 group by country""")
-    logger.info("hi")
+    logger.info(f"***Final dataframe count: {result.count()} ***")
 
     result.show()
